@@ -28,12 +28,7 @@ class NVD3PluginTestCase(TestCase):
         self.plugin3.chart_type = 'pieChart'
         self.plugin3.xdata = 'Banana, Strawberry, Orange, Apple'
         self.plugin3.ydata = '10, 40, 60, 70'
-        
-        #extra arguments
-        self.plugin4 = add_plugin(placeholder, 'NVD3CMSPlugin', 'en')
-        self.plugin4.attrs = "{'color_list':  ['magenta', 'green', 'orange', 'blue']}"
-        self.plugin4.xdata = 'Banana, Strawberry, Orange, Apple'
-        self.plugin4.ydata = '10, 40, 60, 70'
+      
         
 
     def test_simple_plugin1(self):
@@ -50,13 +45,11 @@ class NVD3PluginTestCase(TestCase):
         
     def test_simple_pieChart(self):
         html3 = self.plugin3.render_plugin(context={})
-        html4 = self.plugin4.render_plugin(context={})
-        print html3
         self.assertIn('Banana', html3)
         self.assertIn('Strawberry', html3)
         self.assertIn('Orange', html3)
         self.assertIn('Apple', html3)
-        self.assertIn('magenta', html4)
+
 
         
     

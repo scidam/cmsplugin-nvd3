@@ -6,9 +6,6 @@ DATASEP = getattr(settings, 'DATASEP', ',')
 #Group separator for y-series
 YDATAGROUPSEP = getattr(settings, 'YDATAGROUPSEP', ';')
 
-#Used in piechart only
-DEFAULT_PIE_COLORS = getattr(settings, 'DEFAULT_PIE_COLORS', ['red', 'green', 'orange', 'blue'])
-
 #Length of random part of id 
 ID_RANDOM_LENGTH = getattr(settings, 'ID_RANDOM_LENGTH', 7)
 

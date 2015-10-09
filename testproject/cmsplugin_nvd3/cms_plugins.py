@@ -76,12 +76,7 @@ class NVD3CMSPlugin(CMSPluginBase):
         
         ynames = instance.ynames.split(',')
         
-        if instance.chart_type == 'pieChart':
-            try:
-                pie_colors = instance.pie_colors.split(',')
-            except:
-                pie_colors = DEFAULT_PIE_COLORS
-        
+       
         if not all(map(lambda x: len(x)==len(xdata), ydata)):
             error = _("""Length of some of ydata arrays not equal to the xdata one. Check inputs.""")
 
@@ -95,12 +90,9 @@ class NVD3CMSPlugin(CMSPluginBase):
                     'x_axis_format': instance.x_date_format,
                     'color_category': instance.color_category,
                     'name': container_name,
-                    'color_list': pie_colors
                    }
             pars.update(extra_attrs)
-            if instance.chart_type == 'pieChart' and pie_colors!=DEFAULT_PIE_COLORS:
-               pars['color_category'] = None
-            
+
             chart = eval(instance.chart_type)(**pars)
             
             if len(ynames)!=len(ydata):

@@ -36,8 +36,6 @@ class BaseNVD3model(CMSPlugin):
                                      help_text=_('Current x-axis date format'), 
                                      verbose_name=_('Date format'), blank=True)
     
-    pie_colors = models.CharField(max_length=500, default='red, blue, orange', blank=True)
-    
     #data 
     xdata = models.TextField(verbose_name='X-data', help_text=_('Values separated by commas'))
     ydata = models.TextField(verbose_name='Y-data', help_text=_('Groups of values separated by commas; groups assumed to be separated by semicolons'))
