@@ -1,6 +1,8 @@
 import os
 import django
+
 gettext = lambda s: s
+
 """
 Django settings for testproject project.
 
@@ -12,7 +14,6 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -47,10 +48,7 @@ WSGI_APPLICATION = 'testproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
+# Internationalization https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'en'
 
@@ -132,16 +130,15 @@ INSTALLED_APPS = (
     'south',
     'sekizai',
     'testproject',
-    
 )
 
 LANGUAGES = (
-    ## Customize this
+    # Customize this
     ('en', gettext('en')),
 )
 
 CMS_LANGUAGES = {
-    ## Customize this
+    # Customize this
     'default': {
         'public': True,
         'hide_untranslated': False,
@@ -159,7 +156,7 @@ CMS_LANGUAGES = {
 }
 
 CMS_TEMPLATES = (
-    ## Customize this
+    # Customize this
     ('fullwidth.html', 'Fullwidth'),
     ('sidebar_left.html', 'Sidebar Left'),
     ('sidebar_right.html', 'Sidebar Right')
@@ -171,7 +168,9 @@ CMS_PLACEHOLDER_CONF = {}
 
 DATABASES = {
     'default':
-        {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'project.db', 'HOST': 'localhost', 'USER': '', 'PASSWORD': '', 'PORT': ''}
+        {'ENGINE': 'django.db.backends.sqlite3', 'NAME': 'project.db',
+         'HOST': 'localhost', 'USER': '', 'PASSWORD': '', 'PORT': ''
+         }
 }
 
 MIGRATION_MODULES = {

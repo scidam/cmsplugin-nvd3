@@ -14,6 +14,7 @@
             padding-right: 20px;
         }
     </style>
+    {% render_block "js" %}
 </head>
 <body>
 {% cms_toolbar %}
@@ -24,6 +25,6 @@
     {% block content %}
     {% endblock content %}
 </div>
-{% render_block "js" %}
+
 </body>
 </html>

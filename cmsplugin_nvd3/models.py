@@ -2,6 +2,7 @@ from django.db import models
 from cms.models import CMSPlugin
 from django.utils.translation import ugettext_lazy as _
 
+
 class BaseNVD3model(CMSPlugin):
     CHART_TYPES = ['lineWithFocusChart', 'lineChart', 'multiBarChart', 'pieChart',
                    'stackedAreaChart', 'multiBarHorizontalChart', 'linePlusBarChart', 
