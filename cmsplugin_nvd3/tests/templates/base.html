@@ -1,0 +1,15 @@
+{% load cms_tags  sekizai_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test for cmsplugin-nvd3</title>
+    {% render_block "css" %}
+    
+</head>
+<body>
+{% block content %}
+{%placeholder "test"%}
+{% endblock content %}
+{% render_block "js" %}
+</body>
+</html>

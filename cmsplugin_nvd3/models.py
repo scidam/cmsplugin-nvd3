@@ -1,5 +1,5 @@
-from django.db import models
 from cms.models import CMSPlugin
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -27,7 +27,7 @@ class BaseNVD3model(CMSPlugin):
                                       verbose_name=_('Wrapper container id'),
                                       default='unique',
                                       help_text=_('If `unique`,\
-                                       id will be set randomly each time'))
+ id will be set randomly each time'))
     color_category = models.CharField(max_length=15, help_text=_(''),
                                       verbose_name=_('Color category'),
                                       default=COLOR_CATEGORIES[0][0],
