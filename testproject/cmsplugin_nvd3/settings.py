@@ -25,7 +25,7 @@ MAX_CONTAINER_DIM = getattr(settings, 'MAX_CONTAINER_DIM', 3000)
 
 # D3 sources. You can define it as 'local' to use local copy from static dir
 D3JS_SOURCE = getattr(settings, 'D3JS_SOURCE',
-                      '//cdnjs.cloudflare.com/ajax/libs/d3/3.1.5/d3.min.js')
+                      '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js')
 NVD3JS_SOURCE = getattr(settings, 'NVD3JS_SOURCE',
                         '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js'
                         )

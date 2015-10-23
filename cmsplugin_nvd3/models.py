@@ -53,11 +53,17 @@ class BaseNVD3model(CMSPlugin):
                              help_text=_('Values separated by commas'))
     ydata = models.TextField(verbose_name='Y-data', blank=True,
                              help_text=_('Groups of values separated by commas;\
-                             groups should be separated by semicolons'))
+ groups should be separated by semicolons'))
     ynames = models.TextField(verbose_name='Y-names',
                               help_text=_('Series names separated by commas'),
                               blank=True)
 
+    # Extra series attrs
+    sattrs = models.TextField(verbose_name='Series attrs',
+                              help_text=_('Extra series attrs separated as y-data groups.\
+ Also, see python-nvd3 documentation.'),
+                              blank=True)
+    # Extra chart attrs
     attrs = models.TextField(blank=True,
                              help_text=_('Additional chart attributes'),
                              default='', verbose_name=_('Chart attributes')

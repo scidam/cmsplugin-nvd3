@@ -22,7 +22,7 @@ def _xdataloader(xdata):
         data = xdata.split(DATASEP)
     except AttributeError:
         pass
-    return data
+    return [x.strip() for x in data]
 
 
 def _ydataloader(ydata):
@@ -30,7 +30,7 @@ def _ydataloader(ydata):
     try:
         for item in ydata.split(YDATAGROUPSEP):
             try:
-                data.append(item.split(DATASEP))
+                data.append([x.strip() for x in item.split(DATASEP)])
             except:
                 pass
     except AttributeError:
@@ -74,7 +74,7 @@ class NVD3CMSPlugin(CMSPluginBase):
         # xdata len == ydata len
         xdata = _xdataloader(instance.xdata)
         ydata = _ydataloader(instance.ydata)
-
+        series_attrs = _ydataloader(instance.sattrs)
         ynames = instance.ynames.split(',')
         if not all(map(lambda x: len(x) == len(xdata), ydata)):
             error = _("""Length of some of ydata arrays not equal\
@@ -90,19 +90,23 @@ class NVD3CMSPlugin(CMSPluginBase):
                     'color_category': instance.color_category,
                     'name': container_name,
                     }
+            if instance.chart_type in ['multiBarChart']:
+                pars.update({'x_axis_format': None})
             if instance.x_is_date:
                 pars.update({'x_axis_format': instance.x_date_format})
-
             pars.update(extra_attrs)
-
             chart = eval(instance.chart_type)(**pars)
-
             if len(ynames) != len(ydata):
                 ynames = map(lambda x: _('serie ') + str(x+1),
                              range(len(ydata)))
-
+            ind = 0
             for yitem, yname in zip(ydata, ynames):
-                chart.add_serie(name=yname, y=yitem, x=xdata)
+                try:
+                    sextra = ast.literal_eval(series_attrs[ind])
+                    chart.add_serie(name=yname, y=yitem, x=xdata, extra=sextra)
+                except:
+                    chart.add_serie(name=yname, y=yitem, x=xdata)
+                ind += 1
 
             chart.display_container = False
             chart.buildcontent()
@@ -125,12 +129,12 @@ class NVD3CMSPlugin(CMSPluginBase):
             NVD3_CSS = getattr(settings, 'NVD3_CSS', 'local')
 
             if D3JS_SOURCE.lower() == 'local':
-                d3js_src = NVD3_STATIC + 'd3.v3.js'
+                d3js_src = NVD3_STATIC + 'd3.min.js'
             else:
                 d3js_src = D3JS_SOURCE
 
             if NVD3JS_SOURCE.lower() == 'local':
-                nvd3js_src = NVD3_STATIC + 'nv.d3.js'
+                nvd3js_src = NVD3_STATIC + 'nv.d3.min.js'
             else:
                 nvd3js_src = NVD3JS_SOURCE
 

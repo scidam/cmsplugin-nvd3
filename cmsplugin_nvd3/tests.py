@@ -35,7 +35,7 @@ class NVD3PluginTestCase(TestCase):
         html1 = self.plugin1.render_plugin(context={})
         self.assertIn('river', html1)
         self.assertIn('bank', html1)
-        self.assertIn('id="nvd3id-', html1)
+        self.assertIn('id="nvd3id_', html1)
 
     def test_simple_plugin2(self):
         html2 = self.plugin2.render_plugin(context={})
