@@ -7,7 +7,9 @@
 {% addtoblock "js"%}
         <script src="{{d3js_src}}" type="text/javascript" charset="utf-8"></script>
         <script src="{{nvd3js_src}}" type="text/javascript" charset="utf-8"></script>
-        {{htmldata|safe}}
+{%endaddtoblock%}
+{%addtoblock "js"%}
+{{htmldata|safe}}
 {%endaddtoblock%}
 {% addtoblock "css"%}
 <link media="all" href="{{nvd3css_src}}" type="text/css" rel="stylesheet" />

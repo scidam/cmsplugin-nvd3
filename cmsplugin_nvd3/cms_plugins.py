@@ -15,6 +15,7 @@ from cmsplugin_nvd3.models import NVD3model
 
 NVD3_STATIC = getattr(settings, 'STATIC_URL', '') + '/nvd3plugin/'
 
+
 def _xdataloader(xdata):
     data = None
     try:
@@ -45,6 +46,7 @@ def _safe_int(x):
     if res < 0.0 or res > MAX_CONTAINER_DIM:
         return None
     return res
+
 
 class NVD3CMSPlugin(CMSPluginBase):
     model = NVD3model  # model where plugin data are saved
@@ -88,15 +90,17 @@ class NVD3CMSPlugin(CMSPluginBase):
                     'color_category': instance.color_category,
                     'name': container_name,
                     }
+            if instance.chart_type in ['multiBarChart']:
+                pars.update({'x_axis_format': None})
             if instance.x_is_date:
                 pars.update({'x_axis_format': instance.x_date_format})
-
             pars.update(extra_attrs)
 
             chart = eval(instance.chart_type)(**pars)
 
             if len(ynames) != len(ydata):
-                ynames = map(lambda x: _('serie ') + str(x+1), range(len(ydata)))
+                ynames = map(lambda x: _('serie ') + str(x+1),
+                             range(len(ydata)))
 
             for yitem, yname in zip(ydata, ynames):
                 chart.add_serie(name=yname, y=yitem, x=xdata)
@@ -107,8 +111,12 @@ class NVD3CMSPlugin(CMSPluginBase):
 
             chart_container = NVD3Chart()
             chart_container.name = str(container_name)
-            chart_container.set_graph_height(_safe_int(instance.height) or NVD3_CONTAINER_HEIGHT)
-            chart_container.set_graph_width(_safe_int(instance.width) or NVD3_CONTAINER_WIDTH)
+            chart_container.set_graph_height(
+                _safe_int(instance.height) or NVD3_CONTAINER_HEIGHT
+                                             )
+            chart_container.set_graph_width(
+                _safe_int(instance.width) or NVD3_CONTAINER_WIDTH
+                                            )
             chart_container.buildcontainer()
             html_container = chart_container.container + '\n'
 
@@ -118,12 +126,12 @@ class NVD3CMSPlugin(CMSPluginBase):
             NVD3_CSS = getattr(settings, 'NVD3_CSS', 'local')
 
             if D3JS_SOURCE.lower() == 'local':
-                d3js_src = NVD3_STATIC + 'd3.v3.js'
+                d3js_src = NVD3_STATIC + 'd3.min.js'
             else:
                 d3js_src = D3JS_SOURCE
 
             if NVD3JS_SOURCE.lower() == 'local':
-                nvd3js_src = NVD3_STATIC + 'nv.d3.js'
+                nvd3js_src = NVD3_STATIC + 'nv.d3.min.js'
             else:
                 nvd3js_src = NVD3JS_SOURCE
 
@@ -132,8 +140,8 @@ class NVD3CMSPlugin(CMSPluginBase):
             else:
                 nvd3css_src = NVD3_CSS
         else:
-            nvd3js_src, d3js_src, nvd3css_src,
-            outputhtml = None, None, None, None
+            nvd3js_src,\
+                d3js_src, nvd3css_src, outputhtml = None, None, None, None
             if not error:
                 error = "X-data or Y-data not defined correctly."
 
