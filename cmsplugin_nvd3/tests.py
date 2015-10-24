@@ -15,16 +15,16 @@ from django.test.utils import override_settings
 
 # from cmsplugin_nvd3.cms_plugins import NVD3_STATIC
 
-
-urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'', include('cms.urls')),
-)
-
-CMS_TEMPLATES = (('test.html', 'test'),)
-TEMPLATE_DIRS = os.path.join(
-            os.path.dirname(os.path.dirname(__file__)), 'templates'
-                              )
+# 
+# urlpatterns = patterns('',
+#     url(r'^admin/', include(admin.site.urls)),
+#     url(r'', include('cms.urls')),
+# )
+# 
+# CMS_TEMPLATES = (('test.html', 'test'),)
+# TEMPLATE_DIRS = os.path.join(
+#             os.path.dirname(os.path.dirname(__file__)), 'templates'
+#                               )
 
 
 
@@ -78,7 +78,7 @@ class LazyNVD3PluginTestCase(TestCase):
 #         self.assertIn('', html3)
 
 
-class RenderPluginTestCase(CMSTestCase):
+class RenderPluginTestCase(TestCase):
 
     def setUp(self):
         # Every test needs a client.
@@ -87,9 +87,6 @@ class RenderPluginTestCase(CMSTestCase):
         self.plugin = add_plugin(placeholder, 'NVD3CMSPlugin', 'en')
         self.client = Client()
 
-    @override_settings(CMS_TEMPLATES=CMS_TEMPLATES,
-                       TEMPLATE_DIRS=TEMPLATE_DIRS,
-                       ROOT_URLCONF='cmsplugin_nvd3.tests.tests')
     def test_LineChart(self):
         self.plugin.chart_type = 'lineChart'
         self.plugin.xdata = ' 1, 2, 3'
@@ -99,3 +96,29 @@ class RenderPluginTestCase(CMSTestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
         self.asserIn('lineChart', response.content)
+        self.assertIn('one curve', response.content)
+        self.assertIn('two curve', response.content)
+
+    def test_lineWithFocusChart(self):
+        self.plugin.chart_type = 'lineWithFocusChart'
+        self.plugin.xdata = '1,2,3'
+        self.plugin.ydata = '4,5,6'
+        self.page.publish()
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('serie', response.content)
+
+    def test_multiBarChart(self):
+        self.plugin.chart_type = 'multiBarChart'
+        self.plugin.xdata = 'one,two,three'
+        self.plugin.ydata = '1,2,3; 7,4,2'
+        self.page.publish()
+        response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('three', response.content)
+# , , \
+#     , pieChart, stackedAreaChart, \
+#     multiBarHorizontalChart, linePlusBarChart, \
+#     cumulativeLineChart, discreteBarChart, scatterChart
+if __name__ == '__main__':
+    unittest.main()

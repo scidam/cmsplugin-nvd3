@@ -1,16 +1,18 @@
-import uuid
 import ast
 import re
-from django.utils.translation import ugettext_lazy as _
-from cms.plugin_pool import plugin_pool
+import uuid
+
 from cms.plugin_base import CMSPluginBase
-from nvd3.NVD3Chart import NVD3Chart
+from cms.plugin_pool import plugin_pool
+from django.utils.translation import ugettext_lazy as _
 from nvd3 import lineWithFocusChart, lineChart, \
     multiBarChart, pieChart, stackedAreaChart, \
     multiBarHorizontalChart, linePlusBarChart, \
     cumulativeLineChart, discreteBarChart, scatterChart
-from cmsplugin_nvd3.settings import *
+from nvd3.NVD3Chart import NVD3Chart
+
 from cmsplugin_nvd3.models import NVD3model
+from cmsplugin_nvd3.settings import *
 
 
 NVD3_STATIC = getattr(settings, 'STATIC_URL', '') + '/nvd3plugin/'
@@ -122,11 +124,6 @@ class NVD3CMSPlugin(CMSPluginBase):
                                             )
             chart_container.buildcontainer()
             html_container = chart_container.container + '\n'
-
-            # Needed for testing and setting overriding
-            D3JS_SOURCE = getattr(settings, 'D3JS_SOURCE', 'local')
-            NVD3JS_SOURCE = getattr(settings, 'NVD3JS_SOURCE', 'local')
-            NVD3_CSS = getattr(settings, 'NVD3_CSS', 'local')
 
             if D3JS_SOURCE.lower() == 'local':
                 d3js_src = NVD3_STATIC + 'd3.min.js'

@@ -1,9 +1,0 @@
-{% if error%}
-{{error}}
-{%else%}
-{{htmlcontainer|safe}}
-{{htmldata|safe}}
-{%endif%}
-
-
-
