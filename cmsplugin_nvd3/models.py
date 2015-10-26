@@ -1,8 +1,11 @@
 from cms.models import CMSPlugin
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from cms.utils.compat.dj import python_2_unicode_compatible
+from django.core.exceptions import ValidationError
+from cmsplugin_nvd3.settings import *
 
-
+@python_2_unicode_compatible
 class BaseNVD3model(CMSPlugin):
     CHART_TYPES = ['lineWithFocusChart',
                    'lineChart', 'multiBarChart', 'pieChart',
@@ -69,6 +72,20 @@ class BaseNVD3model(CMSPlugin):
                              default='', verbose_name=_('Chart attributes')
                              )
 
+    def __str__(self):
+        return u"NVD3: " + self.chart_type
+
+    def clean(self):
+
+        if self.width < 0.0 or self.width > MAX_CONTAINER_DIM:
+            raise ValidationError(
+                _("Container width should be in interval [0, %s]."%MAX_CONTAINER_DIM))
+
+        if self.height < 0.0 or self.height > MAX_CONTAINER_DIM:
+            raise ValidationError(
+                _("Container height should be in interval [0, %s]."%MAX_CONTAINER_DIM))        
+        
+        
     class Meta:
         abstract = True
 

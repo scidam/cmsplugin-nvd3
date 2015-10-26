@@ -31,3 +31,4 @@ NVD3JS_SOURCE = getattr(settings, 'NVD3JS_SOURCE',
                         )
 NVD3_CSS = getattr(settings, 'NVD3_CSS',
                    '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css')
+

@@ -54,12 +54,14 @@ class NVD3CMSPlugin(CMSPluginBase):
     model = NVD3model  # model where plugin data are saved
     name = _("NVD3 Plugin")
     render_template = "cmsplugin_nvd3/nvd3plugin.html"
+    text_enabled = True
 
     def render(self, context, instance, placeholder):
         error, html_container = None, None
         if instance.chart_type not in NVD3model.CHART_TYPES:
             error = _('Chart type not specified.')
 
+        # TODO: Change default behaviour of unique id field
         if instance.container_name == 'unique':
             container_name = uuid.uuid4().hex[:ID_RANDOM_LENGTH]
         elif not instance.container_name:
@@ -152,5 +154,8 @@ class NVD3CMSPlugin(CMSPluginBase):
                         'nvd3css_src': nvd3css_src
                         })
         return context
+
+    def icon_src(self, instance):
+        return NVD3_STATIC + u"icon.png"
 
 plugin_pool.register_plugin(NVD3CMSPlugin)
