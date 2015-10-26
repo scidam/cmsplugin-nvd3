@@ -84,8 +84,7 @@ class BaseNVD3model(CMSPlugin):
         if self.height < 0.0 or self.height > MAX_CONTAINER_DIM:
             raise ValidationError(
                 _("Container height should be in interval [0, %s]."%MAX_CONTAINER_DIM))        
-        
-        
+
     class Meta:
         abstract = True
 
