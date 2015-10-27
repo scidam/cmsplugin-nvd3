@@ -10,7 +10,7 @@ YDATAGROUPSEP = getattr(settings, 'YDATAGROUPSEP', ';')
 ID_RANDOM_LENGTH = getattr(settings, 'ID_RANDOM_LENGTH', 7)
 
 # Container prefix; used only if container name is not specified by user
-CONTAINER_NAME_ID_PREFIX = getattr(settings, 'CONTAINER_NAME_ID_PREFIX',
+CONTAINER_ID_PREFIX = getattr(settings, 'CONTAINER_ID_PREFIX',
                                    'nvd3id_')
 
 # Default container width; used if not specified

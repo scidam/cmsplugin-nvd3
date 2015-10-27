@@ -61,28 +61,22 @@ class NVD3CMSPlugin(CMSPluginBase):
         if instance.chart_type not in NVD3model.CHART_TYPES:
             error = _('Chart type not specified.')
 
-        # TODO: Change default behaviour of unique id field
-        if instance.container_name == 'unique':
+        if not instance.container_name:
             container_name = uuid.uuid4().hex[:ID_RANDOM_LENGTH]
-        elif not instance.container_name:
-            container_name = uuid.uuid4().hex[:ID_RANDOM_LENGTH]
+            container_name = CONTAINER_ID_PREFIX + container_name
+        elif re.match(r'[a-zA-Z0-9\-]+',  instance.container_name):
+            container_name = instance.container_name
         else:
-            container_name = instance.container_name
-
-        container_name = CONTAINER_NAME_ID_PREFIX + container_name
-
-        if re.match(r'[a-zA-Z0-9\-]+',  instance.container_name)\
-           and instance.container_name != 'unique':
-            container_name = instance.container_name
+            container_name = uuid.uuid4().hex[:ID_RANDOM_LENGTH]
+            container_name = CONTAINER_ID_PREFIX + container_name
 
         # xdata len == ydata len
         xdata = _xdataloader(instance.xdata)
         ydata = _ydataloader(instance.ydata)
-        series_attrs = _ydataloader(instance.sattrs)
-        ynames = instance.ynames.split(',')
+        ynames = instance.ynames.split(DATASEP)
         if not all(map(lambda x: len(x) == len(xdata), ydata)):
             error = _("""Length of some of ydata arrays not equal\
-            to the xdata one. Check inputs.""")
+ to the xdata one. Check inputs.""")
 
         try:
             extra_attrs = ast.literal_eval(instance.attrs)
@@ -103,14 +97,8 @@ class NVD3CMSPlugin(CMSPluginBase):
             if len(ynames) != len(ydata):
                 ynames = map(lambda x: _('serie ') + str(x+1),
                              range(len(ydata)))
-            ind = 0
             for yitem, yname in zip(ydata, ynames):
-                try:
-                    sextra = ast.literal_eval(series_attrs[ind])
-                    chart.add_serie(name=yname, y=yitem, x=xdata, extra=sextra)
-                except:
-                    chart.add_serie(name=yname, y=yitem, x=xdata)
-                ind += 1
+                chart.add_serie(name=yname, y=yitem, x=xdata)
 
             chart.display_container = False
             chart.buildcontent()
