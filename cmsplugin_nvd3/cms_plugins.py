@@ -13,41 +13,9 @@ from nvd3.NVD3Chart import NVD3Chart
 
 from cmsplugin_nvd3.models import NVD3model
 from cmsplugin_nvd3.settings import *
-
+from cmsplugin_nvd3.utils import _xdataloader, _ydataloader, _safe_int
 
 NVD3_STATIC = getattr(settings, 'STATIC_URL', '') + '/nvd3plugin/'
-
-
-def _xdataloader(xdata):
-    data = None
-    try:
-        data = xdata.split(DATASEP)
-    except AttributeError:
-        pass
-    return [x.strip() for x in data]
-
-
-def _ydataloader(ydata):
-    data = []
-    try:
-        for item in ydata.split(YDATAGROUPSEP):
-            try:
-                data.append([x.strip() for x in item.split(DATASEP)])
-            except:
-                pass
-    except AttributeError:
-        pass
-    return data
-
-
-def _safe_int(x):
-    try:
-        res = int(x)
-    except:
-        return None
-    if res < 0.0 or res > MAX_CONTAINER_DIM:
-        return None
-    return res
 
 
 class NVD3CMSPlugin(CMSPluginBase):
@@ -59,7 +27,7 @@ class NVD3CMSPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         error, html_container = None, None
         if instance.chart_type not in NVD3model.CHART_TYPES:
-            error = _('Chart type not specified.')
+            error = _('Chart type is not specified or of not valid type.')
 
         if not instance.container_name:
             container_name = uuid.uuid4().hex[:ID_RANDOM_LENGTH]

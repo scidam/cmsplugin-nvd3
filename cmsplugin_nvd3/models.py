@@ -3,8 +3,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.exceptions import ValidationError
-from cmsplugin_nvd3.settings import *
-from cmsplugin_nvd3.cms_plugins import _xdataloader, _ydataloader
+from cmsplugin_nvd3.settings import MAX_CONTAINER_DIM
+from cmsplugin_nvd3.utils import _xdataloader, _ydataloader
 
 
 @python_2_unicode_compatible
@@ -32,7 +32,7 @@ class BaseNVD3model(CMSPlugin):
                                       verbose_name=_('Wrapper container id'),
                                       default='',
                                       help_text=_('Id name of chart container.\
- Default: CONTAINER_ID_PREFIX+random symbols'))
+ Default: CONTAINER_ID_PREFIX+random symbols'), blank=True)
     color_category = models.CharField(max_length=15, help_text=_(''),
                                       verbose_name=_('Color category'),
                                       default=COLOR_CATEGORIES[0][0],
@@ -92,8 +92,8 @@ You should provide date format string in the <Date format> field."))
         xdata = _xdataloader(self.xdata)
         ydata = _ydataloader(self.ydata)
         if not all(map(lambda x: len(x) == len(xdata), ydata)):
-            raise ValidationError(_("Length of some ydata arrays not equal\
- to the xdata one. Check input data."))
+            raise ValidationError(_("Length of one of the Y-data arrays not equal\
+ to the X-data one. Check input data."))
 
     class Meta:
         abstract = True
