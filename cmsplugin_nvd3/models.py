@@ -32,7 +32,7 @@ class BaseNVD3model(CMSPlugin):
                                       verbose_name=_('Wrapper container id'),
                                       default='',
                                       help_text=_('Id name of chart container.\
- Default: CONTAINER_ID_PREFIX+random symbols'), blank=True)
+ Default: CONTAINER_ID_PREFIX+random symbols. Optional.'), blank=True)
     color_category = models.CharField(max_length=15, help_text=_(''),
                                       verbose_name=_('Color category'),
                                       default=COLOR_CATEGORIES[0][0],
@@ -60,14 +60,14 @@ class BaseNVD3model(CMSPlugin):
                              help_text=_('Groups of values separated by commas;\
  groups should be separated by semicolons'))
     ynames = models.TextField(verbose_name='Y-names',
-                              help_text=_('Series names separated by commas'),
+                              help_text=_('Curve names separated by commas. Optional.'),
                               blank=True)
 
     # Extra chart attrs
     attrs = models.TextField(blank=True,
                              help_text=_('Additional chart \
-attributes as a django dict'),
-                             default='', verbose_name=_('Chart attributes')
+attributes given as a django dict'),
+                             default='', verbose_name=_('Chart attributes. Optional.')
                              )
 
     def __str__(self):

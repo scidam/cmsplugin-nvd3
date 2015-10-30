@@ -11,7 +11,7 @@ ID_RANDOM_LENGTH = getattr(settings, 'ID_RANDOM_LENGTH', 7)
 
 # Container prefix; used only if container name is not specified by user
 CONTAINER_ID_PREFIX = getattr(settings, 'CONTAINER_ID_PREFIX',
-                                   'nvd3id_')
+                              'nvd3id_')
 
 # Default container width; used if not specified
 NVD3_CONTAINER_WIDTH = getattr(settings, 'NVD3_CONTAINER_WIDTH', 600)
@@ -31,4 +31,3 @@ NVD3JS_SOURCE = getattr(settings, 'NVD3JS_SOURCE',
                         )
 NVD3_CSS = getattr(settings, 'NVD3_CSS',
                    '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css')
-

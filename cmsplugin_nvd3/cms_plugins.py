@@ -112,6 +112,6 @@ class NVD3CMSPlugin(CMSPluginBase):
         return context
 
     def icon_src(self, instance):
-        return NVD3_STATIC + u"icon.png"
+        return NVD3_STATIC + u"nvd3icon.png"
 
 plugin_pool.register_plugin(NVD3CMSPlugin)
