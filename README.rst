@@ -21,7 +21,9 @@ $ pip install python-nvd3
 
 ::
 
-$ pip install cmsplugin-nvd3
+$ git clone http://github.com/scidam/cmsplugin-nvd3.git
+
+Make ``cmsplugin_nvd3`` directory available from your Django project.  
 
 Insert plugin app in your ``settings.py`` ::
 
@@ -37,7 +39,7 @@ Create your database (If you working with ``django 1.7`` and higher) ::
   
   manage.py migrate cmsplugin_nvd3
 
-If your django version is lower 1.7, use ``syncdb`` command ::
+If your Django version is lower 1.7, use ``syncdb`` command ::
 
   manage.py syncdb
 
