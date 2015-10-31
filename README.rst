@@ -43,3 +43,5 @@ If your django version is lower 1.7, use ``syncdb`` command
 
 manage.py syncdb
 
+
+
