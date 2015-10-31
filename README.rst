@@ -37,7 +37,7 @@ Create your database (If you working with ``django 1.7`` and higher) ::
   
   manage.py migrate cmsplugin_nvd3
 
-If your django version is lower 1.7, use ``syncdb`` command ::
+If your django version is lower 1.7, use ``syncdb`` command 
 
 ::
 
