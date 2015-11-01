@@ -1,26 +1,14 @@
 import os
 from setuptools import setup
 
-README_FILE = 'README.md'
-
-
-def get_long_description():
-    if not os.path.isfile(README_FILE):
-        return ''
-    try:
-        import pypandoc
-        doc = open(README_FILE).read()
-        description = pypandoc.convert(doc, 'rst', format='markdown')
-    except Exception:
-        description = open(README_FILE).read()
-    return description
+README_FILE = 'README.rst'
 
 setup(name='cmsplugin-nvd3',
       packages=['cmsplugin-nvd3'],
       version='0.1',
-      description='Embedding nvd3 charts into django-cms driven sites',
-      keywords='django,django-cms,nvd3,plugin,charts',
-      long_description=get_long_description(),
+      description='Include nvd3 charts into django-cms driven sites',
+      keywords='nvd3,plugin,charts,nvd3-charts,django,django-cms',
+      long_description=open(README_FILE).read(),
       author='Dmitry E. Kislov',
       author_email='kislov@easydan.com',
       url='https://github.com/scidam/cmsplugin-nvd3',

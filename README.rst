@@ -2,8 +2,8 @@
 Requirements
 ============
 
-Plugin works as expected and tested under Python 2.7 and Python 3.4. The following libraries 
-(along with those required by django-cms) are required
+The plugin works as expected under Python 2.7 and Python 3.4. The following libraries 
+(along with those required by django-cms) are necessary:
 
 - ``Django`` >= 1.5
 - ``django-cms`` >= 2.4 (include all of Django CMS 3.x releases)
@@ -13,7 +13,7 @@ Plugin works as expected and tested under Python 2.7 and Python 3.4. The followi
 Installation
 ============
 
-It is assumed that django-cms already installed. Additionally, you need install required ``python-nvd3`` module. 
+It is assumed that django-cms already installed. Additionally, you need install ``python-nvd3`` module. 
  
 ::
 
@@ -21,11 +21,9 @@ $ pip install python-nvd3
 
 ::
 
-$ git clone http://github.com/scidam/cmsplugin-nvd3.git
+$ pip install cmsplugin-nvd3
 
-Make ``cmsplugin_nvd3`` directory available from your Django project.  
-
-Insert plugin app in your ``settings.py`` ::
+Insert the plugin app in your ``settings.py`` ::
 
   INSTALLED_APPS = [
       # ...
@@ -43,6 +41,6 @@ If your Django version is lower 1.7, use ``syncdb`` command ::
 
   manage.py syncdb
 
-You can use the plugin in a single manner or embed it into text plugins.
+The plugin can be used in a single manner or embedded into text plugins.
 
 
