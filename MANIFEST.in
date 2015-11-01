@@ -1,2 +1,4 @@
-include README.md
-recursive-include mpseudo *.py
+include README.rst
+recursive-include cmsplugin_nvd3 *.py
+recursive-include cmsplugin_nvd3/static *.*
+recursive-include cmsplugin_nvd3/templates *.*
