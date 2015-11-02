@@ -1,4 +1,5 @@
 include README.rst
+include LICENSE
 recursive-include cmsplugin_nvd3 *.py
 recursive-include cmsplugin_nvd3/static *.*
 recursive-include cmsplugin_nvd3/templates *.*

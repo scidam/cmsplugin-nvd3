@@ -5,10 +5,11 @@ README_FILE = 'README.rst'
 
 setup(name='cmsplugin-nvd3',
       packages=['cmsplugin_nvd3'],
-      version='0.2',
+      version='0.3',
       description='Include nvd3 charts into django-cms driven sites',
       keywords='nvd3,plugin,charts,nvd3-charts,django,django-cms',
       long_description=open(README_FILE).read(),
+      include_package_data=True,
       author='Dmitry E. Kislov',
       author_email='kislov@easydan.com',
       url='https://github.com/scidam/cmsplugin-nvd3',
