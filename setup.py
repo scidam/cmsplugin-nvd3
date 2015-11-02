@@ -5,7 +5,7 @@ README_FILE = 'README.rst'
 
 setup(name='cmsplugin-nvd3',
       packages=['cmsplugin_nvd3'],
-      version='0.1.post2',
+      version='0.2',
       description='Include nvd3 charts into django-cms driven sites',
       keywords='nvd3,plugin,charts,nvd3-charts,django,django-cms',
       long_description=open(README_FILE).read(),
