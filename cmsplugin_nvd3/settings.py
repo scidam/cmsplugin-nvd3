@@ -27,5 +27,5 @@ CMSNVD3_D3JS_SOURCE = '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'
 CMSNVD3_JS_SOURCE = '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js'
 CMSNVD3_CSS = '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css'
 
-#
+#a path for d3,nvd3 static files, defined as: STATIC_URL+CMSNVD3_URL 
 CMSNVD3_URL = 'nvd3plugin/'
