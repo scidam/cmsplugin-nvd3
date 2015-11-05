@@ -15,8 +15,6 @@ from cmsplugin_nvd3.models import NVD3model
 from cmsplugin_nvd3.settings import *
 from cmsplugin_nvd3.utils import _xdataloader, _ydataloader, _safe_int
 
-NVD3_STATIC = getattr(settings, 'STATIC_URL', '') + '/nvd3plugin/'
-
 
 class NVD3CMSPlugin(CMSPluginBase):
     model = NVD3model  # model where plugin data are saved
