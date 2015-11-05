@@ -31,7 +31,7 @@ Insert the plugin app in your ``settings.py`` ::
   	  #...	
   ]
 
-Create your database (If you working with ``django 1.7`` and higher) ::
+Create necessary database tables (If you working with ``django 1.7`` and higher) ::
 
   manage.py makemigrations cmsplugin_nvd3
   
@@ -43,4 +43,41 @@ If your Django version is lower 1.7, use ``syncdb`` command ::
 
 The plugin can be used in a single manner or embedded into text plugins.
 
+
+Configuration
+=============
+
+Behaviour of the plugin is controlled by the following settings: ::
+
+    # Value separator for x-data
+    CMSNVD3_DATASEP = ','
+
+    # Group separator for y-series
+    CMSNVD3_YDATAGROUPSEP = ';'
+
+    # Length of random part of id
+    CMSNVD3_ID_RANDOM_LENGTH = 7
+
+    # Container prefix; used only if container name is not specified by user
+    CMSNVD3_CONT_ID_PREFIX = 'nvd3id_'
+
+    # Default container width; used if not specified
+    CMSNVD3_CONT_WIDTH = 600
+
+    # Default container height; used if not specified
+    CMSNVD3_CONT_HEIGHT = 400
+
+    # Maximum allowed container size; all values of width or height will be
+    # reduced to defaults if them exeed this value
+    CMSNVD3_MAX_CONT_DIM = 3000
+
+    # D3, NVD3 sources. You can define it as 'local' to use local copy from static dir
+    CMSNVD3_D3JS_SOURCE = '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js'
+    CMSNVD3_JS_SOURCE = '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.min.js'
+    CMSNVD3_CSS = '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css'
+    # If one or all of these constants are setted up to 'local' (e.g. CMSNVD3_CSS='local'), 
+    # the static resource will be loaded via path CMSNVD3_URL
+
+    #a path for d3,nvd3 static files, defined as: STATIC_URL+CMSNVD3_URL 
+    CMSNVD3_URL = 'nvd3plugin/'
 
