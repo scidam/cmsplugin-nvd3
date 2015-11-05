@@ -1,10 +1,10 @@
 from cms.models import CMSPlugin
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
-from django.core.exceptions import ValidationError
-from cmsplugin_nvd3.settings import MAX_CONTAINER_DIM
 from cmsplugin_nvd3.utils import _xdataloader, _ydataloader
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 
 @python_2_unicode_compatible
@@ -75,15 +75,15 @@ attributes given as a django dict'),
 
     def clean(self):
 
-        if self.width < 0.0 or self.width > MAX_CONTAINER_DIM:
+        if self.width < 0.0 or self.width > settings.CMSNVD3_MAX_CONT_DIM:
             raise ValidationError(
                 _("Container width should be in interval [0, %s]."
-                  % MAX_CONTAINER_DIM))
+                  % settings.CMSNVD3_MAX_CONT_DIM))
 
-        if self.height < 0.0 or self.height > MAX_CONTAINER_DIM:
+        if self.height < 0.0 or self.height > settings.CMSNVD3_MAX_CONT_DIM:
             raise ValidationError(
                 _("Container height should be in interval [0, %s]."
-                  % MAX_CONTAINER_DIM))
+                  % settings.CMSNVD3_MAX_CONT_DIM))
 
         if self.x_is_date and not self.x_date_format:
             raise ValidationError(

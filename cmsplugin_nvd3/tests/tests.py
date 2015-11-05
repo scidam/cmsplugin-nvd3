@@ -1,14 +1,14 @@
-from django.test import TestCase
-
 from cms.api import add_plugin, create_page, publish_page
-
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.test import TestCase
 from django.test.client import Client
 from django.test.utils import override_settings
-from django.contrib.auth.models import User
-from django.conf import settings
+
 
 @override_settings(ROOT_URLCONF='tests.urls')
 class RenderPluginTestCase(TestCase):
+    urls = 'tests.urls'
 
     def setUp(self):
 
@@ -139,10 +139,10 @@ class RenderPluginTestCase(TestCase):
 
 
 
-
-@override_settings(NVD3JS_SOURCE='local', D3JS_SOURCE='local',
-                       NVD3_CSS='local', ROOT_URLCONF='tests.urls')
-class LocalNVD3PluginTestCase(TestCase): 
+@override_settings(CMSNVD3_D3JS_SOURCE='local', CMSNVD3_JS_SOURCE='local',
+                   CMSNVD3_CSS='local', ROOT_URLCONF='tests.urls')
+class LocalNVD3PluginTestCase(TestCase):
+    urls = 'tests.urls'
 
     def setUp(self):
 
@@ -164,5 +164,31 @@ class LocalNVD3PluginTestCase(TestCase):
         self.content = str(self.response.content)
 
     def test_localnvd3(self):
-        print(settings.NVD3_CSS)
         self.assertIn('nvd3plugin', self.content)
+
+
+@override_settings(ROOT_URLCONF='tests.urls')
+class CdnCMSPlugin_TestCase(TestCase):
+    urls = 'tests.urls'
+
+    def setUp(self):
+
+        # create a User
+        self.testuser = User.objects.create_superuser('test',
+                                                      'test@example.com',
+                                                      'testpass')
+
+        # Every test needs a client.
+        self.page = create_page('Test Page', 'test.html', 'en', slug='/',
+                                created_by=self.testuser)
+        placeholder = self.page.placeholders.get(slot='slot')
+        add_plugin(placeholder, 'NVD3CMSPlugin', 'en',
+                   xdata=' 1, 2, 3', ydata='5,6,7; 8,9,10',
+                   ynames='one curve, two curve', chart_type='lineChart')
+        publish_page(self.page, self.testuser, 'en')
+        self.client = Client()
+        self.response = self.client.get('/')
+        self.content = str(self.response.content)
+
+    def test_cdnnvd3(self):
+        self.assertIn('cloudflare', self.content)

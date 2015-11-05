@@ -2,7 +2,7 @@ import os
 gettext = lambda s: s
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 """
-Django settings for cmsp project.
+Django settings for test project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/
@@ -30,8 +30,6 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-NVD3_CSS='local'
-
 
 
 
@@ -68,7 +66,7 @@ MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 STATIC_ROOT = os.path.join(DATA_DIR, 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'cmsp', 'static'),
+    os.path.join(BASE_DIR,'static'),
 )
 SITE_ID = 1
 
