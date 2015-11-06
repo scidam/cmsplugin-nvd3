@@ -32,7 +32,7 @@ Insert the plugin app in your ``settings.py`` ::
   	  #...	
   ]
 
-Create necessary database tables (If you working with ``django 1.7`` and higher) ::
+Create necessary database tables. If you are working with ``Django 1.7`` and higher, do: ::
 
   manage.py makemigrations cmsplugin_nvd3
   
@@ -59,7 +59,7 @@ Behaviour of the plugin is controlled by the following settings (defaults are li
     # Length of random part of id
     CMSNVD3_ID_RANDOM_LENGTH = 7
 
-    # Container prefix; used only if container name is not specified by user
+    # Container prefix; used only if <container name> field is left empty.
     CMSNVD3_CONT_ID_PREFIX = 'nvd3id_'
 
     # Default container width;
