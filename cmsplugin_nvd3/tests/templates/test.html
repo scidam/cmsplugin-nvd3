@@ -3,6 +3,10 @@
 <html>
     <head>
         <title>{% block title %}This is test page{% endblock title %}</title>
+        
+        {% render_block "css" postprocessor "compressor.contrib.sekizai.compress" %}
+        
+        
         <style type="text/css">
             .nav {
                 padding-left: 0;
@@ -37,6 +41,7 @@
             {% endblock content %}
             {%placeholder "slot"%}
         </div>
+        {% render_block "js" postprocessor "compressor.contrib.sekizai.compress" %}
         {% render_block "js" %}
     </body>
 </html>

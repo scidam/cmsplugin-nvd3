@@ -65,6 +65,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 STATIC_ROOT = os.path.join(DATA_DIR, 'static')
 
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = False
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR,'static'),
 )
@@ -134,7 +143,8 @@ INSTALLED_APPS = (
     'djangocms_teaser',
     'djangocms_video',
     'reversion',
-    'cmsplugin_nvd3'
+    'cmsplugin_nvd3',
+    'compressor'
 )
 
 LANGUAGES = (
