@@ -29,3 +29,6 @@ CMSNVD3_CSS = '//cdn.rawgit.com/novus/nvd3/v1.8.1/build/nv.d3.css'
 
 #a path for d3,nvd3 static files, defined as: STATIC_URL+CMSNVD3_URL 
 CMSNVD3_URL = 'nvd3plugin/'
+
+#Floating point delimiter
+CMSNVD3_FLT_DELIMITER = '.'
