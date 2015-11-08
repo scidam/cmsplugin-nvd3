@@ -2,19 +2,22 @@
 Requirements
 ============
 
-The plugin works as expected under Python 2.7 and Python 3.4. The following libraries 
-(along with those required by django-cms) are necessary:
+The plugin works under Python 2.7 and Python 3.4 with all versions of Django supported by Django-CMS. 
+The following libraries (along with those required by django-CMS) are necessary:
 
 - ``Django`` >= 1.5
 - ``django-cms`` >= 2.4 (include all of Django CMS 3.x releases)
 - ``python-nvd3``
 
+More detailed docs with examples are available here_.
+
+.. _here: http://easydan.com/cmsplugin-nvd3-docs/
 
 Installation
 ============
 
 It is assumed that django-cms is already installed. 
-Additionally, you need to install ``python-nvd3`` module. 
+Additionally, you need to install ``python-nvd3``. 
  
 ::
 
@@ -81,4 +84,7 @@ Behaviour of the plugin is controlled by the following settings (defaults are li
 
     #a path for d3, nvd3 static files, defined as: STATIC_URL+CMSNVD3_URL 
     CMSNVD3_URL = 'nvd3plugin/'
+    
+    #Floating point delimiter. You probably will never need to change it.
+	CMSNVD3_FLT_DELIMITER = '.'
 
