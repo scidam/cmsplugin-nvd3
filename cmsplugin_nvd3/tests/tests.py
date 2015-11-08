@@ -119,6 +119,12 @@ class RenderPluginTestCase(TestCase):
         self.assertIn('one curve', self.content)
         self.assertIn('two curve', self.content)
 
+    def test_LongIntInTemplate(self):
+        self.assertNotIn('1365026400000000L', self.content)
+
+    def test_NumericConversion(self):
+        self.assertNotIn('"1365026400000000"', self.content)
+
     def test_pieChart(self):
         # simple pieChart testing
         self.assertIn('Banana', self.content)
