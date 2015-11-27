@@ -84,7 +84,7 @@ Behaviour of the plugin is controlled by the following settings (defaults are li
 
     #a path for d3, nvd3 static files, defined as: STATIC_URL+CMSNVD3_URL 
     CMSNVD3_URL = 'nvd3plugin/'
-    
+
     #Floating point delimiter. You probably will never need to change it.
-	CMSNVD3_FLT_DELIMITER = '.'
+    CMSNVD3_FLT_DELIMITER = '.'
 
