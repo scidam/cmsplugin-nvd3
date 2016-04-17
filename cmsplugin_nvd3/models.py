@@ -45,7 +45,7 @@ class BaseNVD3model(CMSPlugin):
                                     )
     x_date_format = models.CharField(
                             max_length=15, default='%d %b %Y',
-                            help_text=_('Current x-axis date format string'),
+                            help_text=_('X-axis date format string (Used if pervious is True)'),
                             verbose_name=_('Date format string'), blank=True
                                      )
 
@@ -67,7 +67,7 @@ class BaseNVD3model(CMSPlugin):
     # Extra chart attrs
     attrs = models.TextField(blank=True,
                              help_text=_('Additional chart \
-attributes given as a python dict; see python-nvd3 docs.'),
+attributes given as a python dict; see python-nvd3 docs'),
                              default='', verbose_name=_('Chart attributes. Optional.')
                              )
 

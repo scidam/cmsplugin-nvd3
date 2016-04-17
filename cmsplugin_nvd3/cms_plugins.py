@@ -42,8 +42,9 @@ class NVD3CMSPlugin(CMSPluginBase):
         ydata = _ydataloader(instance.ydata)
         ynames = instance.ynames.split(settings.CMSNVD3_DATASEP)
         if not all(map(lambda x: len(x) == len(xdata), ydata)):
-            error = _("""Length of some of ydata arrays not equal\
- to the xdata one. Check inputs.""")
+            # This is validation after data loading
+            error = _("""Length of one of ydata arrays not equal\
+ to length of the xdata array. Check inputs.""")
 
         try:
             extra_attrs = ast.literal_eval(instance.attrs)
