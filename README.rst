@@ -1,23 +1,32 @@
+About
+=====
 
-Requirements
-============
+The plugin provides an easy way to insert non-shophisticated
+function graphs to `django-cms`_  driven websites.
 
-The plugin works under Python 2.7 and Python 3.4 with all versions of Django supported by Django-CMS. 
-The following libraries (along with those required by django-CMS) are necessary:
-
-- ``Django`` >= 1.5, <=1.9
-- ``django-cms`` >= 2.4, <=3.2
-- ``python-nvd3``
 
 More detailed docs with examples are available here_.
 
 .. _here: http://easydan.com/cmsplugin-nvd3-docs/
 
+.. _django-cms: http://django-cms.org/
+
+
+Requirements
+============
+
+The plugin works under Python 2.7 and Python 3.4 with all versions of Django supported by Django-CMS. 
+The following libraries (along with those required by django-CMS) are required:
+
+- ``Django`` >= 1.5, <=1.9
+- ``django-cms`` >= 2.4, <=3.2
+- ``python-nvd3`` (tested with 0.14.2)
+
+
 Installation
 ============
 
-It is assumed that django-cms is already installed. 
-Additionally, you need to install ``python-nvd3``. 
+It is assumed that `django-cms`_ is already installed.
  
 ::
 
@@ -57,7 +66,7 @@ Behaviour of the plugin is controlled by the following settings (defaults are li
     # Length of random part of id
     CMSNVD3_ID_RANDOM_LENGTH = 7
 
-    # Container prefix; used only if <container name> field is left empty.
+    # Container prefix; used only if <container name> field in the model is left empty.
     CMSNVD3_CONT_ID_PREFIX = 'nvd3id_'
 
     # Default container width;
