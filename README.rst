@@ -5,8 +5,8 @@ Requirements
 The plugin works under Python 2.7 and Python 3.4 with all versions of Django supported by Django-CMS. 
 The following libraries (along with those required by django-CMS) are necessary:
 
-- ``Django`` >= 1.5
-- ``django-cms`` >= 2.4 (include all of Django CMS 3.x releases)
+- ``Django`` >= 1.5, <=1.9
+- ``django-cms`` >= 2.4, <=3.2
 - ``python-nvd3``
 
 More detailed docs with examples are available here_.
@@ -35,15 +35,10 @@ Insert the plugin app in your ``settings.py`` ::
   	  #...	
   ]
 
-Create necessary database tables. If you are working with ``Django 1.7`` and higher, do: ::
-
-  manage.py makemigrations cmsplugin_nvd3
-  
+Create necessary database tables: ::
+ 
   manage.py migrate cmsplugin_nvd3
 
-If your Django version is lower 1.7, use ``syncdb`` command ::
-
-  manage.py syncdb
 
 The plugin can be used in a single manner or embedded into text plugins.
 
