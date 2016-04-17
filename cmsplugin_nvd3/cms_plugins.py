@@ -10,14 +10,14 @@ from nvd3.NVD3Chart import NVD3Chart
 
 from cms.plugin_base import CMSPluginBase
 from cms.plugin_pool import plugin_pool
-from cmsplugin_nvd3.models import NVD3model
+from cmsplugin_nvd3.models import NVD3Model
 from cmsplugin_nvd3.utils import _xdataloader, _ydataloader, _safe_int
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 
 class NVD3CMSPlugin(CMSPluginBase):
-    model = NVD3model  # model where plugin data are saved
+    model = NVD3Model  # model where plugin data are saved
     name = _("NVD3 Plugin")
     render_template = "cmsplugin_nvd3/nvd3plugin.html"
     text_enabled = True
@@ -25,7 +25,7 @@ class NVD3CMSPlugin(CMSPluginBase):
 
     def render(self, context, instance, placeholder):
         error, html_container = None, None
-        if instance.chart_type not in NVD3model.CHART_TYPES:
+        if instance.chart_type not in NVD3Model.CHART_TYPES:
             error = _('Chart type is not specified or of not valid type.')
 
         if not instance.container_name:

@@ -13,6 +13,9 @@ setup(name='cmsplugin-nvd3',
       author='Dmitry E. Kislov',
       author_email='kislov@easydan.com',
       url='https://github.com/scidam/cmsplugin-nvd3',
+      install_requires=[
+          'python-nvd3<=0.14.0',
+      ],
       classifiers=[
           'Development Status :: 4 - Beta',
           'Environment :: Web Environment',

@@ -26,13 +26,9 @@ class BaseNVD3model(CMSPlugin):
                                   help_text=_('Select chart type'),
                                   default=CHART_TYPES_CHOICES[1][0],
                                   choices=CHART_TYPES_CHOICES)
-    width = models.IntegerField(max_length=10, default=600, blank=True)
-    height = models.IntegerField(max_length=10, default=400, blank=True)
-    container_name = models.CharField(max_length=30,
-                                      verbose_name=_('Wrapper container id'),
-                                      default='',
-                                      help_text=_('Id name of chart container.\
- Default: CONTAINER_ID_PREFIX+random symbols. Optional.'), blank=True)
+    width = models.IntegerField(default=600, blank=True)
+    height = models.IntegerField(default=400, blank=True)
+
     color_category = models.CharField(max_length=15, help_text=_(''),
                                       verbose_name=_('Color category'),
                                       default=COLOR_CATEGORIES[0][0],
@@ -42,15 +38,15 @@ class BaseNVD3model(CMSPlugin):
     # X -axis-properties
     x_is_date = models.BooleanField(
                             default=False,
-                            verbose_name=_('X-axis is of date-format?'),
+                            verbose_name=_('Is x-axis date?'),
                             help_text=_('If True, x-axis values will\
-                                        be treated as of date-format'),
+                                        be treated as dates'),
                             blank=True
                                     )
     x_date_format = models.CharField(
                             max_length=15, default='%d %b %Y',
-                            help_text=_('Current x-axis date format'),
-                            verbose_name=_('Date format'), blank=True
+                            help_text=_('Current x-axis date format string'),
+                            verbose_name=_('Date format string'), blank=True
                                      )
 
     # data
@@ -58,15 +54,20 @@ class BaseNVD3model(CMSPlugin):
                              help_text=_('Values separated by commas'))
     ydata = models.TextField(verbose_name='Y-data', blank=True,
                              help_text=_('Groups of values separated by commas;\
- groups should be separated by semicolons'))
+ groups are separated by semicolons'))
     ynames = models.TextField(verbose_name='Y-names',
                               help_text=_('Curve names separated by commas. Optional.'),
                               blank=True)
+    container_name = models.CharField(max_length=30,
+                                      verbose_name=_('Chart wrapper container id'),
+                                      default='',
+                                      help_text=_('Id of chart container, i.e. id of a div html tag.\
+ Default: CONTAINER_ID_PREFIX+random symbols. Optional.'), blank=True)
 
     # Extra chart attrs
     attrs = models.TextField(blank=True,
                              help_text=_('Additional chart \
-attributes given as a django dict'),
+attributes given as a python dict; see python-nvd3 docs.'),
                              default='', verbose_name=_('Chart attributes. Optional.')
                              )
 
@@ -88,17 +89,17 @@ attributes given as a django dict'),
         if self.x_is_date and not self.x_date_format:
             raise ValidationError(
                 _("X-axis is of date-format. \
-You should provide date format string in the <Date format> field."))
+You should provide valid format string in the <Date format string> field."))
         xdata = _xdataloader(self.xdata)
         ydata = _ydataloader(self.ydata)
         if not all(map(lambda x: len(x) == len(xdata), ydata)):
             raise ValidationError(_("Length of one of the Y-data arrays not equal\
- to the X-data one. Check input data."))
+ to length of the X-data array. Check input data."))
 
     class Meta:
         abstract = True
 
 
-class NVD3model(BaseNVD3model):
+class NVD3Model(BaseNVD3model):
     class Meta:
         abstract = False

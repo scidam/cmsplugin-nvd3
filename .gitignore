@@ -61,3 +61,4 @@ target/
 project.db
 .project
 .pydevproject
+env
