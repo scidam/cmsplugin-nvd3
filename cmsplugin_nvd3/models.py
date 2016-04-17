@@ -45,7 +45,7 @@ class BaseNVD3model(CMSPlugin):
                                     )
     x_date_format = models.CharField(
                             max_length=15, default='%d %b %Y',
-                            help_text=_('X-axis date format string (Used if pervious is True)'),
+                            help_text=_('X-axis date format string (Used if the pervious is True)'),
                             verbose_name=_('Date format string'), blank=True
                                      )
 
@@ -53,8 +53,8 @@ class BaseNVD3model(CMSPlugin):
     xdata = models.TextField(verbose_name='X-data',
                              help_text=_('Values separated by commas'))
     ydata = models.TextField(verbose_name='Y-data', blank=True,
-                             help_text=_('Groups of values separated by commas;\
- groups are separated by semicolons'))
+                             help_text=_('Group(s) of values separated by commas;\
+ groups (to plot a few curves) are separated by semicolons'))
     ynames = models.TextField(verbose_name='Y-names',
                               help_text=_('Curve names separated by commas. Optional.'),
                               blank=True)
