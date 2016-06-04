@@ -9,10 +9,6 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('cms', '0013_urlconfrevision'),
-    ]
-
     operations = [
         migrations.CreateModel(
             name='NVD3Model',
