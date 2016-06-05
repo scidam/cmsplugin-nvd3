@@ -15,7 +15,7 @@ More detailed docs with examples are available here_.
 Requirements
 ============
 
-The plugin works under Python 2.7 and Python 3.4 with all versions of Django supported by Django-CMS. 
+The plugin works under Python 2.7+ and Python 3.4+ with all versions of Django supported by Django-CMS. 
 The following libraries (along with those required by django-CMS) are required:
 
 - ``Django`` >= 1.5, <=1.9
