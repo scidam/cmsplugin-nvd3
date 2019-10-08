@@ -1,13 +1,12 @@
+DISCONTINUED
+============
+
 About
 =====
 
 The plugin provides an easy way to insert non-shophisticated
 function graphs to `django-cms`_  driven websites.
 
-
-More detailed docs with examples are available here_.
-
-.. _here: http://easydan.com/cmsplugin-nvd3-docs/
 
 .. _django-cms: http://django-cms.org/
 
